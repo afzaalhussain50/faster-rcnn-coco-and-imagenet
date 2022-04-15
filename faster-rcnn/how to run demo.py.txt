@@ -1,0 +1,25 @@
+1) download resnet101 pretrained model resent101_caffe.pth using this link https://www.dropbox.com/s/iev3tkbz5wyyuz9/resnet101_caffe.pth?dl=0
+2) download faster_rcnn_1_10_14657.pth pretrained on coco using this link https://www.dropbox.com/s/be0isevd22eikqb/faster_rcnn_1_10_14657.pth?dl=0
+3) create data/pretrained_mode and put these pretrained models in this directory
+4) set demo.py input arguments as "--net res101 --checksession 1 --checkepoch 10 --checkpoint 14657 --load_dir data\pretrained_model\" using edit configurations
+
+=>pip install -r requirements.txt
+Compile the cuda dependencies using following simple commands:
+
+downgrade pythorch to 1.0.0 version using this command
+=>conda install pytorch==1.0.0 torchvision==0.2.1 -c pytorch
+
+downgrade scipy to 1.1.0 version
+=>pip install scipy==1.1.0
+
+=>cd lib
+=>python setup.py build develop
+
+
+5) replace pascal_classes in demo.py with coco_classes with extra __backround__ class
+6) edit lib/mode/utils/config.py with:
+    # __C.ANCHOR_SCALES = [8,16,32]  #orignal
+    __C.ANCHOR_SCALES = [4,8,16,32]
+7) create custom images directory named as fvqa-images and update default images directory in demo.py arguments.
+
+
